@@ -1,0 +1,79 @@
+<html>
+
+<head>
+  <title>Lissajous Curves</title>
+</head>
+
+
+<body>
+
+<div>
+  Lissajous curves are described by the following equations:
+</div>
+
+<pre>
+  x(t) = sin(&omega;*t + &sigma;)
+  y(t) = sin(t)
+</pre>
+
+<table>
+  <tr><td>&omega;</td><td><input id='omega' value='4.1'></td></tr>
+  <tr><td>&sigma;</td><td><input type="text" id='sigma' value='0'></td></tr>
+  <tr><td>periods</td><td><input type="text" id='cycles' value='10'><td></tr>
+<table>
+
+<canvas id='demo' width=500 height=500>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+<script>
+function draw_lissajous(omega, sigma, cycles) {
+  var canvas = $('#demo').get(0);
+  var ctx = canvas.getContext('2d');
+
+  var c_h = 500;
+  var c_w = 500;
+  var step = 0.01;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+ 
+  ctx.strokeStyle = "red";
+
+  ctx.beginPath();
+
+  for(var i=0; i<(cycles * Math.PI*2) + step; i+=step) {
+    var x = Math.sin(omega*i + sigma);
+    var y = Math.sin(i);
+
+    var scale=200;
+
+    ctx.lineTo(c_w/2 + (x*scale), c_h/2 + (y*scale));
+  }
+
+  ctx.stroke();
+}
+
+
+function update() {
+  var omega = parseFloat($('input#omega').val());
+  var sigma = parseFloat($('input#sigma').val());
+  var cycles = parseFloat($('input#cycles').val());
+
+  if (isNaN(omega)) omega = 0;
+  if (isNaN(sigma)) sigma = 0;
+  if (isNaN(cycles)) cycles = 10;
+
+  draw_lissajous(omega, sigma, cycles);
+}
+
+
+$('input').keyup(function() {
+  update();
+});
+
+
+update();
+</script>
+
+</body>
+</html>
