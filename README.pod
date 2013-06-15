@@ -6,7 +6,7 @@ lissajous - Draw lissajous curves in HTML5 canvas elements
 
 =head1 VIEW ONLINE DEMO
 
-http://hoytech.github.com/lissajous
+http://hoytech.github.io/lissajous
 
 =head1 SOURCE
 
